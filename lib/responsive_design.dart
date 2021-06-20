@@ -1,7 +1,4 @@
-library responsive_design;
-
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/responsive/responsive.dart';
+export 'src/responsive/responsive_scaffold.dart';
+export 'src/responsive/responsive_app_bar.dart';
+export 'src/widgets/app_bar_action.dart';
