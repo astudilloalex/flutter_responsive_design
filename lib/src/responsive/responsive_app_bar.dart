@@ -120,14 +120,8 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool smallScreen = Responsive.isSmallScreen(context);
-    final bool mediumScreen = Responsive.isMediumScreen(context);
     return AppBar(
-      actions: smallScreen
-          ? _smallScreenActions
-          : mediumScreen
-              ? _mediumScreenActions
-              : actions,
+      actions: _actions(context),
       actionsIconTheme: actionsIconTheme,
       backgroundColor: backgroundColor,
       backwardsCompatibility: backwardsCompatibility,
@@ -153,11 +147,11 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  List<Widget>? get _smallScreenActions {
-    return [...?actions?.where((act) => act.showInSmallScreen)];
-  }
-
-  List<Widget>? get _mediumScreenActions {
-    return [...?actions?.where((act) => act.showInMediumScreen)];
+  List<Widget>? _actions(BuildContext context) {
+    if (Responsive.isLargeScreen(context)) return actions;
+    if (Responsive.isMediumScreen(context))
+      return [...?actions?.where((act) => act.showInMediumScreen)];
+    if (Responsive.isSmallScreen(context))
+      return [...?actions?.where((act) => act.showInSmallScreen)];
   }
 }
