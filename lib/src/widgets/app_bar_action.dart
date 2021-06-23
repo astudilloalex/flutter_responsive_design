@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// It must be used in a ResponsiveAppBar in actions.
 class AppBarAction extends StatelessWidget {
-  ///
+  /// The primary widget displayed in the app bar action.
   final Widget child;
 
   /// Indicates if the action should be shown on medium screens.
