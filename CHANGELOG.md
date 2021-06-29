@@ -1,3 +1,12 @@
+## 0.0.8
+* Add background color to ResponsiveScaffold
+
+## 0.0.7
+* Now you can set the height of ResponsiveAppBar
+
+## 0.0.6
+* Now the body of the Scaffold can be extended behind the App Bar
+
 ## 0.0.5
 * Update example
 * Create an Auto Drawer with app bar actions

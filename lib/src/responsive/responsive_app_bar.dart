@@ -62,6 +62,12 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// The shape of the app bar's material's shape as well as its shadow.
   final ShapeBorder? shape;
 
+  /// Controls whether the title is displayed on medium-sized screens.
+  final bool showTitleInMediumScreen;
+
+  /// Controls whether the title is displayed on small screens.
+  final bool showTitleInSmallScreen;
+
   /// Specifies the style to use for the system overlays that overlap the AppBar.
   final SystemUiOverlayStyle? systemOverlayStyle;
 
@@ -107,6 +113,8 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.primary = true,
     this.shadowColor,
     this.shape,
+    this.showTitleInMediumScreen = true,
+    this.showTitleInSmallScreen = true,
     this.systemOverlayStyle,
     this.textTheme,
     this.title,
@@ -139,9 +147,10 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
       shape: shape,
       systemOverlayStyle: systemOverlayStyle,
       textTheme: textTheme,
-      title: title,
+      title: _title(context),
       titleSpacing: titleSpacing,
       titleTextStyle: titleTextStyle,
+      toolbarHeight: toolbarHeight,
       toolbarOpacity: toolbarOpacity,
       toolbarTextStyle: toolbarTextStyle,
     );
@@ -153,5 +162,13 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
       return [...?actions?.where((act) => act.showInMediumScreen)];
     if (Responsive.isSmallScreen(context))
       return [...?actions?.where((act) => act.showInSmallScreen)];
+  }
+
+  Widget? _title(BuildContext context) {
+    if (Responsive.isLargeScreen(context)) return title;
+    if (Responsive.isMediumScreen(context) && showTitleInMediumScreen)
+      return title;
+    if (Responsive.isSmallScreen(context) && showTitleInSmallScreen)
+      return title;
   }
 }
