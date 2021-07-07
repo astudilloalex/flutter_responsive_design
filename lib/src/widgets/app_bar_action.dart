@@ -13,7 +13,7 @@ class AppBarAction extends StatelessWidget {
   /// Default is false
   final bool showInSmallScreen;
 
-  AppBarAction({
+  const AppBarAction({
     required this.child,
     this.showInMediumScreen = false,
     this.showInSmallScreen = false,
