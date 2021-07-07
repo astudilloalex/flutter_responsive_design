@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:responsive_design/src/common/constants.dart';
 import 'package:responsive_design/src/responsive/responsive.dart';
 import 'package:responsive_design/src/widgets/app_bar_action.dart';
 
@@ -29,6 +30,10 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// Whether the title should be centered.
   final bool? centerTitle;
 
+  /// Controls the maximum width of the content of the app bar including
+  /// the [title].
+  final double? contentMaxWidth;
+
   /// This property controls the size of the shadow below the app bar.
   final double? elevation;
 
@@ -48,6 +53,9 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// Defines the width of [leading] widget.
   final double? leadingWidth;
 
+  /// The empty space that surrounds the app bar.
+  final EdgeInsetsGeometry margin;
+
   /// A size whose height is the sum of [toolbarHeight] and the [bottom] widget's
   /// preferred height.
   @override
@@ -56,11 +64,8 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// Whether this app bar is being displayed at the top of the screen.
   final bool primary;
 
-  /// The of the shadow below the app bar.
-  final Color? shadowColor;
-
-  /// The shape of the app bar's material's shape as well as its shadow.
-  final ShapeBorder? shape;
+  /// The shape of the app bar [Material].
+  final ShapeBorder shape;
 
   /// Controls whether the title is displayed on medium-sized screens.
   final bool showTitleInMediumScreen;
@@ -104,15 +109,16 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.bottom,
     this.bottomOpacity = 1.0,
     this.centerTitle,
+    this.contentMaxWidth,
     this.elevation,
     this.excludeHeaderSemantics = false,
     this.flexibleSpace,
     this.foregroundColor,
     this.iconTheme,
     this.leadingWidth,
+    this.margin = EdgeInsets.zero,
     this.primary = true,
-    this.shadowColor,
-    this.shape,
+    this.shape = const RoundedRectangleBorder(),
     this.showTitleInMediumScreen = true,
     this.showTitleInSmallScreen = true,
     this.systemOverlayStyle,
@@ -123,52 +129,72 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.toolbarHeight,
     this.toolbarOpacity = 1.0,
     this.toolbarTextStyle,
-  }) : preferredSize = Size.fromHeight(toolbarHeight ??
-            kToolbarHeight + (bottom?.preferredSize.height ?? 0.0));
+  })  : preferredSize = Size.fromHeight(toolbarHeight ??
+            kToolbarHeight + (bottom?.preferredSize.height ?? 0.0)),
+        assert(
+          contentMaxWidth == null || contentMaxWidth >= kLargeScreenMinWidth,
+          'The maximum size must be greater than or equal to $kLargeScreenMinWidth.',
+        );
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      actions: _actions(context),
-      actionsIconTheme: actionsIconTheme,
-      backgroundColor: backgroundColor,
-      backwardsCompatibility: backwardsCompatibility,
-      bottom: bottom,
-      bottomOpacity: bottomOpacity,
-      centerTitle: centerTitle,
-      elevation: elevation,
-      excludeHeaderSemantics: excludeHeaderSemantics,
-      flexibleSpace: flexibleSpace,
-      foregroundColor: foregroundColor,
-      iconTheme: iconTheme,
-      leadingWidth: leadingWidth,
-      primary: primary,
-      shadowColor: shadowColor,
+    return Card(
+      margin: margin,
+      color: backgroundColor ??
+          AppBarTheme.of(context).backgroundColor ??
+          Theme.of(context).primaryColor,
       shape: shape,
-      systemOverlayStyle: systemOverlayStyle,
-      textTheme: textTheme,
-      title: _title(context),
-      titleSpacing: titleSpacing,
-      titleTextStyle: titleTextStyle,
-      toolbarHeight: toolbarHeight,
-      toolbarOpacity: toolbarOpacity,
-      toolbarTextStyle: toolbarTextStyle,
+      child: Center(
+        child: Container(
+          constraints: BoxConstraints(
+            maxWidth: contentMaxWidth ?? MediaQuery.of(context).size.width,
+          ),
+          child: AppBar(
+            actions: _actions(context),
+            actionsIconTheme: actionsIconTheme,
+            backgroundColor: Colors.transparent,
+            backwardsCompatibility: backwardsCompatibility,
+            bottom: bottom,
+            bottomOpacity: bottomOpacity,
+            centerTitle: centerTitle,
+            elevation: 0.0,
+            excludeHeaderSemantics: excludeHeaderSemantics,
+            flexibleSpace: flexibleSpace,
+            foregroundColor: foregroundColor,
+            iconTheme: iconTheme,
+            leadingWidth: leadingWidth,
+            primary: primary,
+            systemOverlayStyle: systemOverlayStyle,
+            textTheme: textTheme,
+            title: _title(context),
+            titleSpacing: titleSpacing,
+            titleTextStyle: titleTextStyle,
+            toolbarHeight: toolbarHeight,
+            toolbarOpacity: toolbarOpacity,
+            toolbarTextStyle: toolbarTextStyle,
+          ),
+        ),
+      ),
     );
   }
 
   List<Widget>? _actions(BuildContext context) {
     if (Responsive.isLargeScreen(context)) return actions;
-    if (Responsive.isMediumScreen(context))
+    if (Responsive.isMediumScreen(context)) {
       return [...?actions?.where((act) => act.showInMediumScreen)];
-    if (Responsive.isSmallScreen(context))
+    }
+    if (Responsive.isSmallScreen(context)) {
       return [...?actions?.where((act) => act.showInSmallScreen)];
+    }
   }
 
   Widget? _title(BuildContext context) {
     if (Responsive.isLargeScreen(context)) return title;
-    if (Responsive.isMediumScreen(context) && showTitleInMediumScreen)
+    if (Responsive.isMediumScreen(context) && showTitleInMediumScreen) {
       return title;
-    if (Responsive.isSmallScreen(context) && showTitleInSmallScreen)
+    }
+    if (Responsive.isSmallScreen(context) && showTitleInSmallScreen) {
       return title;
+    }
   }
 }
