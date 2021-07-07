@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_design/src/common/constants.dart';
 
 /// Responsive widget returns different child depending on the screen size.
 class Responsive extends StatelessWidget {
-  /// Minimum size of a large screen => 1100.
-  static const double largeMinSize = 1100;
-
-  /// Maximum size of a small screen => 600.
-  static const double smallMaxSize = 600;
-
   /// Widget that will be displayed on large screens.
   final Widget? largeScreen;
 
@@ -17,7 +12,7 @@ class Responsive extends StatelessWidget {
   /// Widget that will be displayed on small screens.
   final Widget smallScreen;
 
-  Responsive({
+  const Responsive({
     this.largeScreen,
     this.mediumScreen,
     required this.smallScreen,
@@ -25,25 +20,27 @@ class Responsive extends StatelessWidget {
 
   /// Returns true if screen size is small, requires BuildContext.
   static bool isSmallScreen(BuildContext context) =>
-      MediaQuery.of(context).size.width < smallMaxSize;
+      MediaQuery.of(context).size.width <= kSmallScreenMaxWidth;
 
   /// Returns true if screen size is medium, requires BuildContext.
   static bool isMediumScreen(BuildContext context) =>
-      MediaQuery.of(context).size.width < largeMinSize &&
-      MediaQuery.of(context).size.width >= smallMaxSize;
+      MediaQuery.of(context).size.width < kLargeScreenMinWidth &&
+      MediaQuery.of(context).size.width > kSmallScreenMaxWidth;
 
   /// Returns true if screen size is large, requires BuildContext.
   static bool isLargeScreen(BuildContext context) =>
-      MediaQuery.of(context).size.width >= largeMinSize;
+      MediaQuery.of(context).size.width >= kLargeScreenMinWidth;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (_, constraints) {
-        if (constraints.maxWidth >= largeMinSize)
+        if (constraints.maxWidth >= kLargeScreenMinWidth) {
           return largeScreen ?? smallScreen;
-        if (constraints.maxWidth >= smallMaxSize)
+        }
+        if (constraints.maxWidth > kSmallScreenMaxWidth) {
           return mediumScreen ?? smallScreen;
+        }
         return smallScreen;
       },
     );
