@@ -1,3 +1,9 @@
+## 0.0.10
+* Now you can set the max width of content in responsive app bar
+
+## 0.0.9
+* showTitleInMediumScreen and showTitleInSmallScreen is added on ResponsiveAppBar
+
 ## 0.0.8
 * Add background color to ResponsiveScaffold
 
