@@ -100,7 +100,8 @@ class _SmallScreenWidget extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Text('The screen size is less than ${Responsive.smallMaxSize}'),
+        child:
+            Text('The screen size is less or equal than $kSmallScreenMaxWidth'),
       ),
     );
   }
@@ -117,7 +118,7 @@ class _MediumScreenWidget extends StatelessWidget {
       ),
       body: Center(
         child: Text(
-          'Screen size>= ${Responsive.smallMaxSize} && Screen size<${Responsive.largeMinSize}',
+          'Screen size> $kSmallScreenMaxWidth && Screen size<$kLargeScreenMinWidth',
         ),
       ),
     );
@@ -132,7 +133,7 @@ class _LargeScreenWidget extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Text(
-          'The screen size is equal to or greater than ${Responsive.largeMinSize}',
+          'The screen size is equal to or greater than $kLargeScreenMinWidth',
         ),
       ),
       appBar: AppBar(
