@@ -14,10 +14,11 @@ class AppBarAction extends StatelessWidget {
   final bool showInSmallScreen;
 
   const AppBarAction({
+    Key? key,
     required this.child,
     this.showInMediumScreen = false,
     this.showInSmallScreen = false,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
