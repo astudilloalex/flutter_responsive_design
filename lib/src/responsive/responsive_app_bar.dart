@@ -102,6 +102,7 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   final TextStyle? toolbarTextStyle;
 
   ResponsiveAppBar({
+    Key? key,
     this.actions,
     this.actionsIconTheme,
     this.backgroundColor,
@@ -134,7 +135,8 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
         assert(
           contentMaxWidth == null || contentMaxWidth >= kLargeScreenMinWidth,
           'The maximum size must be greater than or equal to $kLargeScreenMinWidth.',
-        );
+        ),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
