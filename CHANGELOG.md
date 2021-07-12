@@ -1,3 +1,6 @@
+## 0.0.12
+* Now you can set the max width of content in responsive scaffold
+
 ## 0.0.10
 * Now you can set the max width of content in responsive app bar
 
