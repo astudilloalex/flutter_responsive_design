@@ -1,3 +1,6 @@
+## 0.0.13
+* Now you can set the gradient background to scaffold
+
 ## 0.0.12
 * Now you can set the max width of content in responsive scaffold
 

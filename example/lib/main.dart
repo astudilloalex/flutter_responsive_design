@@ -34,6 +34,12 @@ class ExampleOne extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: ResponsiveScaffold(
         backgroundColor: Colors.red,
+        gradientBackground: LinearGradient(colors: [
+          Colors.amber,
+          Colors.blue,
+          Colors.teal,
+        ]),
+        contentMaxWidth: 1000.0,
         showDrawerInMediumScreen: true,
         responsiveAppBar: ResponsiveAppBar(
           title: Text('Example One'),
@@ -55,6 +61,12 @@ class ExampleOne extends StatelessWidget {
               ),
             ),
           ],
+        ),
+        body: Card(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [Text('Welcome')],
+          ),
         ),
       ),
     );

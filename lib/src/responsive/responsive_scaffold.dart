@@ -82,6 +82,8 @@ class ResponsiveScaffold extends StatelessWidget {
   /// Responsible for determining where the [floatingActionButton] should go.
   final FloatingActionButtonLocation? floatingActionButtonLocation;
 
+  final Gradient? gradientBackground;
+
   /// Optional callback that is called when the [Scaffold.drawer] is opened or closed.
   final DrawerCallback? onDrawerChanged;
 
@@ -139,6 +141,7 @@ class ResponsiveScaffold extends StatelessWidget {
     this.floatingActionButton,
     this.floatingActionButtonAnimator,
     this.floatingActionButtonLocation,
+    this.gradientBackground,
     this.onDrawerChanged,
     this.onEndDrawerChanged,
     this.persistentFooterButtons,
@@ -154,13 +157,22 @@ class ResponsiveScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: responsiveAppBar,
-      backgroundColor: backgroundColor,
+      backgroundColor: gradientBackground == null ? backgroundColor : null,
       body: Center(
         child: Container(
-          constraints: BoxConstraints(
-            maxWidth: contentMaxWidth ?? MediaQuery.of(context).size.width,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+            gradient: gradientBackground,
           ),
-          child: body,
+          child: Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: contentMaxWidth ?? MediaQuery.of(context).size.width,
+              ),
+              child: body,
+            ),
+          ),
         ),
       ),
       bottomNavigationBar: bottomNavigationBar,
