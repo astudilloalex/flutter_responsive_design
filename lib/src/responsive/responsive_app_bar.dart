@@ -13,6 +13,9 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// bar's [actions].
   final IconThemeData? actionsIconTheme;
 
+  /// {@macro flutter.material.appbar.automaticallyImplyLeading}
+  final bool automaticallyImplyLeading;
+
   /// The fill color to use for an app bar's [Material].
   final Color? backgroundColor;
 
@@ -105,6 +108,7 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
     Key? key,
     this.actions,
     this.actionsIconTheme,
+    this.automaticallyImplyLeading = true,
     this.backgroundColor,
     this.backwardsCompatibility,
     this.bottom,
@@ -141,6 +145,7 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: elevation,
       margin: margin,
       color: backgroundColor ??
           AppBarTheme.of(context).backgroundColor ??
@@ -151,52 +156,85 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
           constraints: BoxConstraints(
             maxWidth: contentMaxWidth ?? MediaQuery.of(context).size.width,
           ),
-          child: AppBar(
-            actions: _actions(context),
-            actionsIconTheme: actionsIconTheme,
-            backgroundColor: Colors.transparent,
-            backwardsCompatibility: backwardsCompatibility,
-            bottom: bottom,
-            bottomOpacity: bottomOpacity,
-            centerTitle: centerTitle,
-            elevation: 0.0,
-            excludeHeaderSemantics: excludeHeaderSemantics,
-            flexibleSpace: flexibleSpace,
-            foregroundColor: foregroundColor,
-            iconTheme: iconTheme,
-            leadingWidth: leadingWidth,
-            primary: primary,
-            systemOverlayStyle: systemOverlayStyle,
-            textTheme: textTheme,
-            title: _title(context),
-            titleSpacing: titleSpacing,
-            titleTextStyle: titleTextStyle,
-            toolbarHeight: toolbarHeight,
-            toolbarOpacity: toolbarOpacity,
-            toolbarTextStyle: toolbarTextStyle,
+          child: Responsive(
+            smallScreen: AppBar(
+              actions: [...?actions?.where((act) => act.showInSmallScreen)],
+              actionsIconTheme: actionsIconTheme,
+              automaticallyImplyLeading: automaticallyImplyLeading,
+              backgroundColor: Colors.transparent,
+              backwardsCompatibility: backwardsCompatibility,
+              bottom: bottom,
+              bottomOpacity: bottomOpacity,
+              centerTitle: centerTitle,
+              elevation: 0.0,
+              excludeHeaderSemantics: excludeHeaderSemantics,
+              flexibleSpace: flexibleSpace,
+              foregroundColor: foregroundColor,
+              iconTheme: iconTheme,
+              leadingWidth: leadingWidth,
+              primary: primary,
+              systemOverlayStyle: systemOverlayStyle,
+              textTheme: textTheme,
+              title: showTitleInSmallScreen ? title : null,
+              titleSpacing: titleSpacing,
+              titleTextStyle: titleTextStyle,
+              toolbarHeight: toolbarHeight,
+              toolbarOpacity: toolbarOpacity,
+              toolbarTextStyle: toolbarTextStyle,
+            ),
+            mediumScreen: AppBar(
+              actions: [...?actions?.where((act) => act.showInMediumScreen)],
+              actionsIconTheme: actionsIconTheme,
+              automaticallyImplyLeading: automaticallyImplyLeading,
+              backgroundColor: Colors.transparent,
+              backwardsCompatibility: backwardsCompatibility,
+              bottom: bottom,
+              bottomOpacity: bottomOpacity,
+              centerTitle: centerTitle,
+              elevation: 0.0,
+              excludeHeaderSemantics: excludeHeaderSemantics,
+              flexibleSpace: flexibleSpace,
+              foregroundColor: foregroundColor,
+              iconTheme: iconTheme,
+              leadingWidth: leadingWidth,
+              primary: primary,
+              systemOverlayStyle: systemOverlayStyle,
+              textTheme: textTheme,
+              title: showTitleInMediumScreen ? title : null,
+              titleSpacing: titleSpacing,
+              titleTextStyle: titleTextStyle,
+              toolbarHeight: toolbarHeight,
+              toolbarOpacity: toolbarOpacity,
+              toolbarTextStyle: toolbarTextStyle,
+            ),
+            largeScreen: AppBar(
+              actions: actions,
+              actionsIconTheme: actionsIconTheme,
+              automaticallyImplyLeading: automaticallyImplyLeading,
+              backgroundColor: Colors.transparent,
+              backwardsCompatibility: backwardsCompatibility,
+              bottom: bottom,
+              bottomOpacity: bottomOpacity,
+              centerTitle: centerTitle,
+              elevation: 0.0,
+              excludeHeaderSemantics: excludeHeaderSemantics,
+              flexibleSpace: flexibleSpace,
+              foregroundColor: foregroundColor,
+              iconTheme: iconTheme,
+              leadingWidth: leadingWidth,
+              primary: primary,
+              systemOverlayStyle: systemOverlayStyle,
+              textTheme: textTheme,
+              title: title,
+              titleSpacing: titleSpacing,
+              titleTextStyle: titleTextStyle,
+              toolbarHeight: toolbarHeight,
+              toolbarOpacity: toolbarOpacity,
+              toolbarTextStyle: toolbarTextStyle,
+            ),
           ),
         ),
       ),
     );
-  }
-
-  List<Widget>? _actions(BuildContext context) {
-    if (Responsive.isLargeScreen(context)) return actions;
-    if (Responsive.isMediumScreen(context)) {
-      return [...?actions?.where((act) => act.showInMediumScreen)];
-    }
-    if (Responsive.isSmallScreen(context)) {
-      return [...?actions?.where((act) => act.showInSmallScreen)];
-    }
-  }
-
-  Widget? _title(BuildContext context) {
-    if (Responsive.isLargeScreen(context)) return title;
-    if (Responsive.isMediumScreen(context) && showTitleInMediumScreen) {
-      return title;
-    }
-    if (Responsive.isSmallScreen(context) && showTitleInSmallScreen) {
-      return title;
-    }
   }
 }

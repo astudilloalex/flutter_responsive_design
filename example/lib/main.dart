@@ -3,24 +3,29 @@ import 'package:responsive_design/responsive_design.dart';
 
 // Main Method
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 // StatelessWidget to show an example
 class MyApp extends StatelessWidget {
   // This number indicates which example to show, change the number and
   // you will see the example according to the number.
-  final int example = 1;
+  final int example;
+
+  const MyApp({
+    Key? key,
+    this.example = 1,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     switch (example) {
       case 1:
-        return ExampleOne();
+        return const ExampleOne();
       case 2:
-        return ExampleTwo();
+        return const ExampleTwo();
       default:
-        return ExampleOne();
+        return const ExampleOne();
     }
   }
 }
@@ -28,13 +33,15 @@ class MyApp extends StatelessWidget {
 // This example uses responsive widgets, you only have to design once and
 // indicate if it should be displayed on small and medium screens.
 class ExampleOne extends StatelessWidget {
+  const ExampleOne({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: ResponsiveScaffold(
         backgroundColor: Colors.red,
-        gradientBackground: LinearGradient(colors: [
+        gradientBackground: const LinearGradient(colors: [
           Colors.amber,
           Colors.blue,
           Colors.teal,
@@ -42,13 +49,13 @@ class ExampleOne extends StatelessWidget {
         contentMaxWidth: 1000.0,
         showDrawerInMediumScreen: true,
         responsiveAppBar: ResponsiveAppBar(
-          title: Text('Example One'),
+          title: const Text('Example One'),
           actions: [
             AppBarAction(
               child: Center(
                 child: InkWell(
                   onTap: () {},
-                  child: Text('Hello!'),
+                  child: const Text('Hello!'),
                 ),
               ),
             ),
@@ -56,7 +63,7 @@ class ExampleOne extends StatelessWidget {
               child: Center(
                 child: InkWell(
                   onTap: () {},
-                  child: Text('World!'),
+                  child: const Text('World!'),
                 ),
               ),
             ),
@@ -64,8 +71,9 @@ class ExampleOne extends StatelessWidget {
         ),
         body: Card(
           child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [Text('Welcome')],
+            children: const [
+              Text('Welcome'),
+            ],
           ),
         ),
       ),
@@ -77,6 +85,8 @@ class ExampleOne extends StatelessWidget {
 // 3 different graphical interfaces must be designed for each screen size.
 // It is useful when you require different designs for each device.
 class ExampleTwo extends StatelessWidget {
+  const ExampleTwo({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -97,16 +107,16 @@ class _SmallScreenWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Example Two Small Screen'),
+        title: const Text('Example Two Small Screen'),
       ),
       drawer: Drawer(
         child: Column(
           children: [
-            DrawerHeader(child: Text('Responsive')),
-            Divider(),
+            const DrawerHeader(child: Text('Responsive')),
+            const Divider(),
             InkWell(
               onTap: () {},
-              child: Text('Drawer item'),
+              child: const Text('Drawer item'),
             ),
           ],
         ),
@@ -126,7 +136,7 @@ class _MediumScreenWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Example Two Medium Screen'),
+        title: const Text('Example Two Medium Screen'),
       ),
       body: Center(
         child: Text(
@@ -149,14 +159,14 @@ class _LargeScreenWidget extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        title: Text('Example Two Large Screen'),
+        title: const Text('Example Two Large Screen'),
         actions: [
           Center(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
                 onTap: () {},
-                child: Text('Action'),
+                child: const Text('Action'),
               ),
             ),
           ),

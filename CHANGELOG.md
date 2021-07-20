@@ -1,3 +1,15 @@
+## 0.0.17
+* Add auto implement leading in Responsive App Bar
+
+## 0.0.16
+* Remove static unused variables in responsive
+
+## 0.0.15
+* Use responsive to show in three screens
+
+## 0.0.14
+* Responsive App Bar elevation bug fixed.
+
 ## 0.0.13
 * Now you can set the gradient background to scaffold
 

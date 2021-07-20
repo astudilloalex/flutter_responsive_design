@@ -19,19 +19,6 @@ class Responsive extends StatelessWidget {
     required this.smallScreen,
   }) : super(key: key);
 
-  /// Returns true if screen size is small, requires BuildContext.
-  static bool isSmallScreen(BuildContext context) =>
-      MediaQuery.of(context).size.width <= kSmallScreenMaxWidth;
-
-  /// Returns true if screen size is medium, requires BuildContext.
-  static bool isMediumScreen(BuildContext context) =>
-      MediaQuery.of(context).size.width < kLargeScreenMinWidth &&
-      MediaQuery.of(context).size.width > kSmallScreenMaxWidth;
-
-  /// Returns true if screen size is large, requires BuildContext.
-  static bool isLargeScreen(BuildContext context) =>
-      MediaQuery.of(context).size.width >= kLargeScreenMinWidth;
-
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
