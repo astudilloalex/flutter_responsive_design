@@ -66,6 +66,8 @@ const ResponsiveWidget(
   ),
 );
 ```
+![Responsive Widget](example/assets/images/responsive-widget.gif)
+
 ### **Use only responsive app bar**
 The responsive app bar allows to adapt the top tool bar to all screens.
 ```dart
@@ -94,3 +96,4 @@ const Scaffold(
   ),
 );
 ```
+![Responsive Widget](example/assets/images/responsive-app-bar.gif)
