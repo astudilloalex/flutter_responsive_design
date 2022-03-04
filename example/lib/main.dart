@@ -1,176 +1,159 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_design/responsive_design.dart';
 
-// Main Method
+/// Settings to apply in all app to select change points of screen size.
+const ResponsiveSettings settings = ResponsiveSettings(
+  desktopChangePoint: 1150.0,
+  tabletChangePoint: 625.0,
+  watchChangePoint: 250.0,
+);
+
+/// Main function.
 void main() {
   runApp(const MyApp());
 }
 
-// StatelessWidget to show an example
+/// Root of the application.
 class MyApp extends StatelessWidget {
-  // This number indicates which example to show, change the number and
-  // you will see the example according to the number.
-  final int example;
-
-  const MyApp({
-    Key? key,
-    this.example = 1,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    switch (example) {
-      case 1:
-        return const ExampleOne();
-      case 2:
-        return const ExampleTwo();
-      default:
-        return const ExampleOne();
-    }
-  }
-}
-
-// This example uses responsive widgets, you only have to design once and
-// indicate if it should be displayed on small and medium screens.
-class ExampleOne extends StatelessWidget {
-  const ExampleOne({Key? key}) : super(key: key);
+  /// Define a [MyApp] widget.
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Responsive Design Example',
       debugShowCheckedModeBanner: false,
-      home: ResponsiveScaffold(
-        backgroundColor: Colors.red,
-        gradientBackground: const LinearGradient(colors: [
-          Colors.amber,
-          Colors.blue,
-          Colors.teal,
-        ]),
-        contentMaxWidth: 1000.0,
-        showDrawerInMediumScreen: true,
-        responsiveAppBar: ResponsiveAppBar(
-          title: const Text('Example One'),
-          actions: [
-            AppBarAction(
-              child: Center(
-                child: InkWell(
-                  onTap: () {},
-                  child: const Text('Hello!'),
-                ),
-              ),
-            ),
-            AppBarAction(
-              child: Center(
-                child: InkWell(
-                  onTap: () {},
-                  child: const Text('World!'),
-                ),
-              ),
-            ),
-          ],
-        ),
-        body: Card(
-          child: Column(
-            children: const [
-              Text('Welcome'),
-            ],
-          ),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.blueGrey,
         ),
       ),
+      routes: {
+        '/': (_) => const HomePage(),
+        '/responsive-app-bar': (_) => const ResponsiveAppBarExample(),
+        '/responsive-widget': (_) => const ResponsiveWidgetExample(),
+      },
+      initialRoute: '/',
     );
   }
 }
 
-// In this example we use different widgets to display according to screen size.
-// 3 different graphical interfaces must be designed for each screen size.
-// It is useful when you require different designs for each device.
-class ExampleTwo extends StatelessWidget {
-  const ExampleTwo({Key? key}) : super(key: key);
+/// Home page of the app.
+class HomePage extends StatelessWidget {
+  /// Define a [HomePage] widget.
+  const HomePage({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Responsive(
-        smallScreen: _SmallScreenWidget(),
-        mediumScreen: _MediumScreenWidget(),
-        largeScreen: _LargeScreenWidget(),
-      ),
-    );
-  }
-}
-
-// This widget is shown when the screen is small.
-// Used in ExampleTwo
-class _SmallScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Example Two Small Screen'),
-      ),
-      drawer: Drawer(
-        child: Column(
+      body: SafeArea(
+        child: ListView(
           children: [
-            const DrawerHeader(child: Text('Responsive')),
-            const Divider(),
-            InkWell(
-              onTap: () {},
-              child: const Text('Drawer item'),
+            ListTile(
+              onTap: () => Navigator.of(context).pushNamed(
+                '/responsive-app-bar',
+              ),
+              title: const Text('Responsive App Bar'),
+            ),
+            ListTile(
+              onTap: () => Navigator.of(context).pushNamed(
+                '/responsive-widget',
+              ),
+              title: const Text('Responsive Widget'),
             ),
           ],
         ),
       ),
-      body: Center(
-        child:
-            Text('The screen size is less or equal than $kSmallScreenMaxWidth'),
-      ),
     );
   }
 }
 
-// This widget is shown when the screen is medium.
-// Used in ExampleTwo
-class _MediumScreenWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Example Two Medium Screen'),
-      ),
-      body: Center(
-        child: Text(
-          'Screen size> $kSmallScreenMaxWidth && Screen size<$kLargeScreenMinWidth',
-        ),
-      ),
-    );
-  }
-}
+/// Example of a responsive app bar.
+class ResponsiveAppBarExample extends StatelessWidget {
+  /// Define a [ResponsiveAppBarExample] widget.
+  const ResponsiveAppBarExample({Key? key}) : super(key: key);
 
-// This widget is shown when the screen is large.
-// Used in ExampleTwo
-class _LargeScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(
-          'The screen size is equal to or greater than $kLargeScreenMinWidth',
-        ),
-      ),
-      appBar: AppBar(
-        title: const Text('Example Two Large Screen'),
+    return const Scaffold(
+      appBar: ResponsiveAppBar(
+        responsiveSettings: settings,
+        title: Text('Responsive app bar'),
         actions: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InkWell(
-                onTap: () {},
-                child: const Text('Action'),
-              ),
-            ),
+          AppBarAction(
+            Center(child: Text('About')),
+          ),
+          AppBarAction(
+            SizedBox(width: 16.0),
+            showInAllScreens: true,
+          ),
+          AppBarAction(
+            Icon(Icons.brightness_auto_outlined),
+            showInAllScreens: true,
+          ),
+          AppBarAction(
+            SizedBox(width: 16.0),
+            showInAllScreens: true,
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// A responsive widget with multiple design for each screen.
+class ResponsiveWidgetExample extends StatelessWidget {
+  /// Define a [ResponsiveWidgetExample] widget.
+  const ResponsiveWidgetExample({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const ResponsiveWidget(
+      responsiveSettings: settings,
+      desktop: Scaffold(
+        body: Center(
+          child: Text(
+            'Desktop screen',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 25.0,
+            ),
+          ),
+        ),
+      ),
+      phone: Scaffold(
+        body: Center(
+          child: Text(
+            'Phone screen',
+            style: TextStyle(
+              color: Colors.amber,
+              fontSize: 25.0,
+            ),
+          ),
+        ),
+      ),
+      tablet: Scaffold(
+        body: Center(
+          child: Text(
+            'Tablet screen',
+            style: TextStyle(
+              color: Colors.greenAccent,
+              fontSize: 25.0,
+            ),
+          ),
+        ),
+      ),
+      watch: Scaffold(
+        body: Center(
+          child: Text(
+            'Watch screen',
+            style: TextStyle(
+              color: Colors.blueAccent,
+              fontSize: 25.0,
+            ),
+          ),
+        ),
       ),
     );
   }
