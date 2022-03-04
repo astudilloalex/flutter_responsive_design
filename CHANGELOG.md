@@ -1,3 +1,26 @@
+## 0.0.20
+* Add `ResponsiveAppBar` class.
+* Add responsive app bar example.
+
+## 0.0.19
+* Fix example.
+
+## 0.0.18
+* This versión only contains a widget that manage the 4 screen sizes (desktop, phone, tablet, watch).
+* Many changes make, please check the example to update to this version.
+
+## 0.0.17
+* Add auto implement leading in Responsive App Bar
+
+## 0.0.16
+* Remove static unused variables in responsive
+
+## 0.0.15
+* Use responsive to show in three screens
+
+## 0.0.14
+* Responsive App Bar elevation bug fixed.
+
 ## 0.0.13
 * Now you can set the gradient background to scaffold
 
