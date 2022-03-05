@@ -100,6 +100,7 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
     }
     if (maxWidth != null) {
       return Card(
+        margin: EdgeInsets.zero,
         color: backgroundColor ??
             AppBarTheme.of(context).backgroundColor ??
             Theme.of(context).colorScheme.primary,
