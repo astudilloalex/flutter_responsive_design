@@ -1,3 +1,6 @@
+## 0.0.21
+* Remove `ResponsiveAppBar` padding when use `maxWidth` property.
+
 ## 0.0.20
 * Add `ResponsiveAppBar` class.
 * Add responsive app bar example.
