@@ -1,3 +1,7 @@
+## 0.0.22
+* Add the center bool value to `AppBarAction`
+* Add space between actions in `ResponsiveAppBar`
+
 ## 0.0.21
 * Remove `ResponsiveAppBar` padding when use `maxWidth` property.
 
