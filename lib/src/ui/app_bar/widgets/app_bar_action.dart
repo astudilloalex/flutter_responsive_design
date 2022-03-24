@@ -6,12 +6,16 @@ class AppBarAction extends StatelessWidget {
   const AppBarAction(
     this.child, {
     Key? key,
+    this.center = false,
     this.showInAllScreens = false,
     this.showInDesktop = true,
     this.showInPhone = false,
     this.showInTablet = false,
     this.showInWatch = false,
   }) : super(key: key);
+
+  /// Wrap child with [Center] widget.
+  final bool center;
 
   /// The primary widget displayed in the app bar action.
   final Widget child;
@@ -46,6 +50,6 @@ class AppBarAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return child;
+    return center ? Center(child: child) : child;
   }
 }
