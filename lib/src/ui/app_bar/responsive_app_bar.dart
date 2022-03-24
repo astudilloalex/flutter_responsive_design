@@ -9,6 +9,7 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   const ResponsiveAppBar({
     Key? key,
     this.actions,
+    this.actionSpace,
     this.automaticallyImplyLeading = true,
     this.backgroundColor,
     this.centerTitle,
@@ -25,6 +26,9 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   /// A list of Widgets to display in a row after the [title] widget.
   final List<AppBarAction>? actions;
+
+  /// Space between actions.
+  final double? actionSpace;
 
   /// Controls whether we should try to imply the leading widget if null.
   final bool automaticallyImplyLeading;
@@ -78,22 +82,58 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
       switch (type) {
         case ResponsiveType.desktop:
           if (actions![i].showInAllScreens || actions![i].showInDesktop) {
-            currentActions.add(actions![i].child);
+            if (actionSpace != null && i != 0) {
+              currentActions.add(
+                Padding(
+                  padding: EdgeInsets.only(right: actionSpace!),
+                  child: actions![i].child,
+                ),
+              );
+            } else {
+              currentActions.add(actions![i].child);
+            }
           }
           break;
         case ResponsiveType.phone:
           if (actions![i].showInAllScreens || actions![i].showInPhone) {
-            currentActions.add(actions![i].child);
+            if (actionSpace != null) {
+              currentActions.add(
+                Padding(
+                  padding: EdgeInsets.only(right: actionSpace!),
+                  child: actions![i].child,
+                ),
+              );
+            } else {
+              currentActions.add(actions![i].child);
+            }
           }
           break;
         case ResponsiveType.tablet:
           if (actions![i].showInAllScreens || actions![i].showInTablet) {
-            currentActions.add(actions![i].child);
+            if (actionSpace != null) {
+              currentActions.add(
+                Padding(
+                  padding: EdgeInsets.only(right: actionSpace!),
+                  child: actions![i].child,
+                ),
+              );
+            } else {
+              currentActions.add(actions![i].child);
+            }
           }
           break;
         case ResponsiveType.watch:
           if (actions![i].showInAllScreens || actions![i].showInWatch) {
-            currentActions.add(actions![i].child);
+            if (actionSpace != null) {
+              currentActions.add(
+                Padding(
+                  padding: EdgeInsets.only(right: actionSpace!),
+                  child: actions![i].child,
+                ),
+              );
+            } else {
+              currentActions.add(actions![i].child);
+            }
           }
           break;
       }
