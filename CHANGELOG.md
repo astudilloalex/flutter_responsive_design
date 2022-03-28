@@ -1,3 +1,6 @@
+## 0.0.23
+* Fix `AppBarAction`
+
 ## 0.0.22
 * Add the center bool value to `AppBarAction`
 * Add space between actions in `ResponsiveAppBar`

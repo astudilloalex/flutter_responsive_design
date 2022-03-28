@@ -86,11 +86,11 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
               currentActions.add(
                 Padding(
                   padding: EdgeInsets.only(right: actionSpace!),
-                  child: actions![i].child,
+                  child: actions![i],
                 ),
               );
             } else {
-              currentActions.add(actions![i].child);
+              currentActions.add(actions![i]);
             }
           }
           break;
@@ -100,11 +100,11 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
               currentActions.add(
                 Padding(
                   padding: EdgeInsets.only(right: actionSpace!),
-                  child: actions![i].child,
+                  child: actions![i],
                 ),
               );
             } else {
-              currentActions.add(actions![i].child);
+              currentActions.add(actions![i]);
             }
           }
           break;
