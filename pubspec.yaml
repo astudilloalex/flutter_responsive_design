@@ -1,6 +1,6 @@
 name: responsive_design
 description: Create responsive applications using different widgets that adapt to different screen densities.
-version: 0.1.1
+version: 0.1.2
 repository: https://github.com/astudilloalex/flutter_responsive_design/tree/stable
 
 environment:

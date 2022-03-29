@@ -1,3 +1,6 @@
+## 0.1.2
+* Change `changePoints` to `screenChangePoints` for more readable in `ResponsiveSettings` class.
+
 ## 0.1.1
 * Manage the maximun size of the screen in `ResponsiveSettings`.
 
