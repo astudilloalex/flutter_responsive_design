@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_design/responsive_design.dart';
+import 'package:responsive_design/src/domain/entities/responsive_settings.dart';
+import 'package:responsive_design/src/domain/entities/screen_change_points.dart';
+import 'package:responsive_design/src/domain/enums/responsive_type.dart';
+import 'package:responsive_design/src/ui/utilities/responsive_util.dart';
 
 /// Responsive widget that adapts to the size of the screens.
 class ResponsiveWidget extends StatelessWidget {
   /// Define a [ResponsiveWidget] class.
   const ResponsiveWidget({
     Key? key,
-    this.responsiveSettings = const ResponsiveSettings(),
     this.desktop,
     this.phone,
     this.tablet,
     this.watch,
+    this.screenChangePoints,
   })  : assert(
           desktop != null || phone != null || tablet != null || watch != null,
           'At least one widget must not be null.',
         ),
         super(key: key);
-
-  /// Responsive settings to manage the with of the screen.
-  final ResponsiveSettings responsiveSettings;
 
   /// Widget to display in desktop screen.
   final Widget? desktop;
@@ -32,9 +32,16 @@ class ResponsiveWidget extends StatelessWidget {
   /// Widget to display in watch screen.
   final Widget? watch;
 
+  /// Change points to manage screen size.
+  final ScreenChangePoints? screenChangePoints;
+
   @override
   Widget build(BuildContext context) {
-    final ResponsiveType type = responsiveSettings.responsiveType(context);
+    final ResponsiveType type = ResponsiveUtil(
+      changePoints:
+          screenChangePoints ?? ResponsiveSettings.instance.changePoints,
+      context: context,
+    ).responsiveType;
     switch (type) {
       case ResponsiveType.desktop:
         return desktop ?? tablet ?? phone ?? watch!;

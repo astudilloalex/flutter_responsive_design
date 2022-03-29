@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_design/responsive_design.dart';
 
-/// Settings to apply in all app to select change points of screen size.
-const ResponsiveSettings settings = ResponsiveSettings(
-  desktopChangePoint: 1150.0,
-  tabletChangePoint: 625.0,
-  watchChangePoint: 250.0,
-);
-
 /// Main function.
 void main() {
+  // Global Settings
+  ResponsiveSettings.instance.changePoints = const ScreenChangePoints(
+    desktopChangePoint: 1150.0,
+    tabletChangePoint: 625.0,
+    watchChangePoint: 250.0,
+  );
   runApp(const MyApp());
 }
 
@@ -78,7 +77,7 @@ class ResponsiveAppBarExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: ResponsiveAppBar(
-        responsiveSettings: settings,
+        screenChangePoints: ScreenChangePoints(),
         title: Text('Responsive app bar'),
         actions: [
           AppBarAction(
@@ -110,7 +109,6 @@ class ResponsiveWidgetExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const ResponsiveWidget(
-      responsiveSettings: settings,
       desktop: Scaffold(
         body: Center(
           child: Text(

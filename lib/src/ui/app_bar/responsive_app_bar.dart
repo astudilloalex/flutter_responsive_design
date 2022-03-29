@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_design/src/domain/entities/responsive_settings.dart';
+import 'package:responsive_design/src/domain/entities/screen_change_points.dart';
 import 'package:responsive_design/src/domain/enums/responsive_type.dart';
 import 'package:responsive_design/src/ui/app_bar/widgets/app_bar_action.dart';
+import 'package:responsive_design/src/ui/utilities/responsive_util.dart';
 
 /// An AppBar that adapts to different screen sizes.
 class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -17,7 +19,7 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.fitTitle = true,
     this.leading,
     this.maxWidth,
-    this.responsiveSettings = const ResponsiveSettings(),
+    this.screenChangePoints,
     this.title,
     this.titleTextStyle,
     this.toolbarHeight,
@@ -58,8 +60,8 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// the [title].
   final double? maxWidth;
 
-  /// Responsive settings to manage the with of the screen.
-  final ResponsiveSettings responsiveSettings;
+  /// Change points to manage screen size.
+  final ScreenChangePoints? screenChangePoints;
 
   /// The primary widget displayed in the app bar.
   final Widget? title;
@@ -76,7 +78,11 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ResponsiveType type = responsiveSettings.responsiveType(context);
+    final ResponsiveType type = ResponsiveUtil(
+      changePoints:
+          screenChangePoints ?? ResponsiveSettings.instance.changePoints,
+      context: context,
+    ).responsiveType;
     final List<Widget> currentActions = [];
     for (int i = 0; i < (actions?.length ?? 0); i++) {
       switch (type) {

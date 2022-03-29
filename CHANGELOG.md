@@ -1,3 +1,7 @@
+## 0.1.0
+* Add `ScreenChangePoints` class.
+* Now you can settings screen change points globally.
+
 ## 0.0.23
 * Fix `AppBarAction`
 

@@ -1,25 +1,40 @@
 # responsive_design
 
-Create responsive applications using different widgets that adapt to different screen densities.
+Create responsive applications using different widgets that adapt to different screen sizes.
 
 ## Getting Started
 [![pub package](https://pub.dev/static/img/pub-dev-logo-2x.png?hash=umitaheu8hl7gd3mineshk2koqfngugi)](https://pub.dev/packages/responsive_design)
 
+Add dependency on your pubspec.yaml file
+```yaml
+dependencies:
+  responsive_design:
+```
+
+## **Important!**
+Since version `0.1.0` the `ResponsiveSettings` class is no longer used to manage change points.
+Instead use `ScreenChangePoints`, check example for more details.
+
 ### **Add your own settings**
-Manage the responsive screen settings with `ResponsiveSettings` class.
+Manage global the responsive screen change points with `ResponsiveSettings` class.
 ```dart
-const ResponsiveSettings settings = ResponsiveSettings(
-  desktopChangePoint: 1150.0, // Default 1200.0
-  tabletChangePoint: 625.0,   // Default 600.0
-  watchChangePoint: 250.0,    // Default 300.0
-);
+void main() {
+  // Global Settings
+  ResponsiveSettings.instance.changePoints = const ScreenChangePoints(
+    desktopChangePoint: 1150.0,
+    tabletChangePoint: 625.0,
+    watchChangePoint: 250.0,
+  );
+  runApp(const MyApp());
+}
 ```
 ### **Use the responsive widget**
 The responsive widget allows you to have different layouts for each device.
 ```dart
-const ResponsiveWidget(
-  // Optional parameter, if you don't set, default values will be applied.
-  responsiveSettings: settings,
+const ResponsiveWidget(  
+  // If don't set the global values will be applied, if do not exist global values,
+  // the default values will be applied.
+  screenChangePoints: ScreenChangePoints(),
   desktop: Scaffold(
     body: Center(
       child: Text(
@@ -73,8 +88,9 @@ The responsive app bar allows to adapt the top tool bar to all screens.
 ```dart
 const Scaffold(
   appBar: ResponsiveAppBar(
-    // Optional parameter, if you don't set, default values will be applied.
-    responsiveSettings: settings,
+    // If don't set the global values will be applied, if do not exist global values,
+    // the default values will be applied.
+    screenChangePoints: ScreenChangePoints(),
     title: Text('Responsive app bar'),
     actions: [
       AppBarAction(
