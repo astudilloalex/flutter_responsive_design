@@ -4,10 +4,12 @@ import 'package:responsive_design/responsive_design.dart';
 /// Main function.
 void main() {
   // Global Settings
-  ResponsiveSettings.instance.changePoints = const ScreenChangePoints(
-    desktopChangePoint: 1150.0,
-    tabletChangePoint: 625.0,
-    watchChangePoint: 250.0,
+  ResponsiveSettings.instance.setCustomSettings(
+    screenChangePoints: const ScreenChangePoints(
+      desktopChangePoint: 1150.0,
+      tabletChangePoint: 625.0,
+      watchChangePoint: 250.0,
+    ),
   );
   runApp(const MyApp());
 }

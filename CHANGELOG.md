@@ -1,3 +1,6 @@
+## 0.1.1
+* Manage the maximun size of the screen in `ResponsiveSettings`.
+
 ## 0.1.0
 * Add `ScreenChangePoints` class.
 * Now you can settings screen change points globally.

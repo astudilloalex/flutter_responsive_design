@@ -78,9 +78,9 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ResponsiveSettings settings = ResponsiveSettings.instance;
     final ResponsiveType type = ResponsiveUtil(
-      changePoints:
-          screenChangePoints ?? ResponsiveSettings.instance.changePoints,
+      changePoints: screenChangePoints ?? settings.changePoints,
       context: context,
     ).responsiveType;
     final List<Widget> currentActions = [];
@@ -144,6 +144,7 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
           break;
       }
     }
+    final double? maxWidth = this.maxWidth ?? settings.screenMaxWidth;
     if (maxWidth != null) {
       return Card(
         margin: EdgeInsets.zero,
@@ -153,7 +154,7 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
         elevation: elevation,
         child: Center(
           child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: maxWidth!),
+            constraints: BoxConstraints(maxWidth: maxWidth),
             child: AppBar(
               actions: currentActions,
               automaticallyImplyLeading: automaticallyImplyLeading,
