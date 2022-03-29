@@ -1,3 +1,6 @@
+## 0.1.3
+* Export `ResponsiveUtil` class.
+
 ## 0.1.2
 * Change `changePoints` to `screenChangePoints` for more readable in `ResponsiveSettings` class.
 
