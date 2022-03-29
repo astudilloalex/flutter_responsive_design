@@ -80,7 +80,7 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final ResponsiveSettings settings = ResponsiveSettings.instance;
     final ResponsiveType type = ResponsiveUtil(
-      changePoints: screenChangePoints ?? settings.changePoints,
+      changePoints: screenChangePoints ?? settings.screenChangePoints,
       context: context,
     ).responsiveType;
     final List<Widget> currentActions = [];

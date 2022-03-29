@@ -8,7 +8,7 @@ class ResponsiveSettings {
   // prevents instantiation and extension.
   ResponsiveSettings._();
 
-  ScreenChangePoints _changePoints = const ScreenChangePoints();
+  ScreenChangePoints _screeChangePoints = const ScreenChangePoints();
   double? _screenMaxWidth;
 
   /// Set all settings for the all responsive widgets.
@@ -20,7 +20,7 @@ class ResponsiveSettings {
     final ScreenChangePoints? screenChangePoints,
     final double? screenMaxWidth,
   }) {
-    if (screenChangePoints != null) _changePoints = screenChangePoints;
+    if (screenChangePoints != null) _screeChangePoints = screenChangePoints;
     _screenMaxWidth = screenMaxWidth;
   }
 
@@ -28,7 +28,7 @@ class ResponsiveSettings {
   double? get screenMaxWidth => _screenMaxWidth;
 
   /// Returns change points information.
-  ScreenChangePoints get changePoints => _changePoints;
+  ScreenChangePoints get screenChangePoints => _screeChangePoints;
 
   static ResponsiveSettings? _instance;
 

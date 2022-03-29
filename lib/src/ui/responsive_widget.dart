@@ -39,7 +39,7 @@ class ResponsiveWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final ResponsiveType type = ResponsiveUtil(
       changePoints:
-          screenChangePoints ?? ResponsiveSettings.instance.changePoints,
+          screenChangePoints ?? ResponsiveSettings.instance.screenChangePoints,
       context: context,
     ).responsiveType;
     switch (type) {
