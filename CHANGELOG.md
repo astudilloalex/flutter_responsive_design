@@ -1,3 +1,6 @@
+## 0.1.4
+* Fix center `AppBarAction` on tablet and watch screens.
+
 ## 0.1.3
 * Export `ResponsiveUtil` class.
 
