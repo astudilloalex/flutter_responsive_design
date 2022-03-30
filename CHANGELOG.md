@@ -1,3 +1,6 @@
+## 0.1.5
+* Fix `AppBarAction` space in `ResponsiveAppBar`
+
 ## 0.1.4
 * Fix center `AppBarAction` on tablet and watch screens.
 

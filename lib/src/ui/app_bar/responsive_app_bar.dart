@@ -88,7 +88,7 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
       switch (type) {
         case ResponsiveType.desktop:
           if (actions![i].showInAllScreens || actions![i].showInDesktop) {
-            if (actionSpace != null && i != 0) {
+            if (actionSpace != null) {
               currentActions.add(
                 Padding(
                   padding: EdgeInsets.only(right: actionSpace!),
