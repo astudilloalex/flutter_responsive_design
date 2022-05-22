@@ -1,3 +1,4 @@
+import 'package:example/src/sidebar_example.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_design/responsive_design.dart';
 
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         '/': (_) => const HomePage(),
         '/responsive-app-bar': (_) => const ResponsiveAppBarExample(),
         '/responsive-widget': (_) => const ResponsiveWidgetExample(),
+        '/sidebar-widget': (_) => const SidebarExample(),
       },
       initialRoute: '/',
     );
@@ -62,6 +64,12 @@ class HomePage extends StatelessWidget {
                 '/responsive-widget',
               ),
               title: const Text('Responsive Widget'),
+            ),
+            ListTile(
+              onTap: () => Navigator.of(context).pushNamed(
+                '/sidebar-widget',
+              ),
+              title: const Text('Sidebar Widget'),
             ),
           ],
         ),

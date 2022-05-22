@@ -151,7 +151,7 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
         color: backgroundColor ??
             AppBarTheme.of(context).backgroundColor ??
             Theme.of(context).colorScheme.primary,
-        elevation: elevation,
+        elevation: elevation ?? Theme.of(context).appBarTheme.elevation,
         child: Center(
           child: ConstrainedBox(
             constraints: BoxConstraints(maxWidth: maxWidth),
@@ -176,7 +176,7 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: automaticallyImplyLeading,
       backgroundColor: backgroundColor,
       centerTitle: centerTitle,
-      elevation: 0.0,
+      elevation: elevation,
       leading: leading,
       title: fitTitle ? FittedBox(child: title) : title,
       titleTextStyle: titleTextStyle,

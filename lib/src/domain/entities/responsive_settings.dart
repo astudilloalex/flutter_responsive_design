@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_constructors_over_static_methods
-
 import 'package:responsive_design/src/domain/entities/screen_change_points.dart';
 
 /// Manage the responsive screen settings.
@@ -10,6 +8,8 @@ class ResponsiveSettings {
 
   ScreenChangePoints _screeChangePoints = const ScreenChangePoints();
   double? _screenMaxWidth;
+  double? _sidebarOpenWidth;
+  double? _sidebarCompactWidth;
 
   /// Set all settings for the all responsive widgets.
   ///
@@ -20,6 +20,7 @@ class ResponsiveSettings {
     final ScreenChangePoints? screenChangePoints,
     final double? screenMaxWidth,
   }) {
+    assert(screenMaxWidth == null || screenMaxWidth > 0);
     if (screenChangePoints != null) _screeChangePoints = screenChangePoints;
     _screenMaxWidth = screenMaxWidth;
   }
@@ -27,12 +28,19 @@ class ResponsiveSettings {
   /// Returns the maximum width for all responsive widgets.
   double? get screenMaxWidth => _screenMaxWidth;
 
+  /// Width of the sidebar when is open.
+  double get sidebarOpenWidth => _sidebarOpenWidth ?? 300.0;
+
+  /// Width of the sidebar when is compact.
+  double get sidebarCompactWidth => _sidebarCompactWidth ?? 50.0;
+
   /// Returns change points information.
   ScreenChangePoints get screenChangePoints => _screeChangePoints;
 
   static ResponsiveSettings? _instance;
 
   /// Returns a instance of the [ResponsiveSettings] class.
+  // ignore: prefer_constructors_over_static_methods
   static ResponsiveSettings get instance {
     return _instance ??= ResponsiveSettings._();
   }
