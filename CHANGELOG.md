@@ -1,3 +1,6 @@
+## 0.2.1
+* Add `color`, `selectedColor` and `selected`property to `SidebarItem`.
+
 ## 0.2.0
 * Fix `elevation` in `ResponsiveAppBar`.
 * Add `Sidebar` widget.
