@@ -1,3 +1,8 @@
+## 0.2.0
+* Fix `elevation` in `ResponsiveAppBar`.
+* Add `Sidebar` widget.
+* Add `ResponsiveScaffold` widget.
+
 ## 0.1.5
 * Fix `AppBarAction` space in `ResponsiveAppBar`
 
