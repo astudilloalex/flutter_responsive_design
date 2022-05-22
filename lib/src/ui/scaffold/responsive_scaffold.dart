@@ -7,8 +7,9 @@ class ResponsiveScaffold extends StatelessWidget {
     Key? key,
     this.appBar,
     this.body,
-    this.drawer,
     this.bodyMaxWidth,
+    this.drawer,
+    this.onDrawerChanged,
     this.sidebar,
   })  : assert(bodyMaxWidth == null || bodyMaxWidth > 0.0),
         super(key: key);
@@ -26,6 +27,9 @@ class ResponsiveScaffold extends StatelessWidget {
   /// devices. Swipes in from either left-to-right ([TextDirection.ltr]) or
   /// right-to-left ([TextDirection.rtl])
   final Widget? drawer;
+
+  /// Optional callback that is called when the [Scaffold.drawer] is opened or closed.
+  final DrawerCallback? onDrawerChanged;
 
   /// Add left sidebar in the scaffold, only work if [drawer] is null.
   final Sidebar? sidebar;
@@ -45,6 +49,7 @@ class ResponsiveScaffold extends StatelessWidget {
             appBar: appBar,
             drawer: sidebar,
             body: body,
+            onDrawerChanged: onDrawerChanged,
           );
         }
       }
@@ -62,6 +67,7 @@ class ResponsiveScaffold extends StatelessWidget {
                         child: body,
                       ),
                     ),
+              onDrawerChanged: onDrawerChanged,
             ),
           ),
         ],
@@ -78,6 +84,7 @@ class ResponsiveScaffold extends StatelessWidget {
               ),
             ),
       drawer: drawer,
+      onDrawerChanged: onDrawerChanged,
     );
   }
 }

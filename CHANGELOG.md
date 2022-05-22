@@ -1,3 +1,6 @@
+## 0.2.2
+* Add `onDrawerChanged` to `ResponsiveScaffold`.
+
 ## 0.2.1
 * Add `color`, `selectedColor` and `selected`property to `SidebarItem`.
 
