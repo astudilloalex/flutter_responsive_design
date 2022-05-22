@@ -12,9 +12,9 @@ class SidebarExample extends StatelessWidget {
         asDrawer: true,
         items: [
           SidebarItem(
-            icon: Icon(Icons.home_outlined),
+            icon: const Icon(Icons.home_outlined),
             onTap: () {},
-            title: Text('Hi'),
+            title: const Text('Hi'),
           )
         ],
       ),
