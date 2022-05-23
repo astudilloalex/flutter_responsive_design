@@ -1,3 +1,9 @@
+## 0.2.4
+* Change `sidebar` from `Sidebar` to `Widget` in `ResponsiveScaffold`.
+
+## 0.2.3
+* Change `items` from `SidebarItem` to `Widget`.
+
 ## 0.2.2
 * Add `onDrawerChanged` to `ResponsiveScaffold`.
 

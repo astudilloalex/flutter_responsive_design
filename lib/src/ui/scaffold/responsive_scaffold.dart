@@ -32,7 +32,7 @@ class ResponsiveScaffold extends StatelessWidget {
   final DrawerCallback? onDrawerChanged;
 
   /// Add left sidebar in the scaffold, only work if [drawer] is null.
-  final Sidebar? sidebar;
+  final Widget? sidebar;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,9 @@ class ResponsiveScaffold extends StatelessWidget {
     ).responsiveType;
     final double? maxWidth = bodyMaxWidth ?? settings.screenMaxWidth;
     if (drawer == null && sidebar != null) {
-      if (sidebar!.mode == SidebarMode.auto && sidebar!.asDrawer) {
+      if (sidebar is Sidebar &&
+          (sidebar as Sidebar?)!.mode == SidebarMode.auto &&
+          (sidebar as Sidebar?)!.asDrawer) {
         if (type == ResponsiveType.phone || type == ResponsiveType.watch) {
           return Scaffold(
             appBar: appBar,
