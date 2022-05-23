@@ -25,7 +25,7 @@ class Sidebar extends StatelessWidget {
   final Widget? header;
 
   /// Items off the sidebar.
-  final List<SidebarItem> items;
+  final List<Widget> items;
 
   /// Mode of the sidebar.
   ///
