@@ -1,3 +1,6 @@
+## 0.2.5
+* Add more widgets to `ResponsiveScaffold`.
+
 ## 0.2.4
 * Change `sidebar` from `Sidebar` to `Widget` in `ResponsiveScaffold`.
 
